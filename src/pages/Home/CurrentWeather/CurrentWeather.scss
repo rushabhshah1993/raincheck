@@ -1,4 +1,5 @@
 @import './../../../utils/scss/_variables';
+@import './../../../utils/scss/_mixins';
 
 .currentWeatherContainer {
     padding: 0 16px 4rem 16px;
@@ -8,9 +9,17 @@
         justify-content: space-between;
         margin-bottom: 2rem;
 
+        @include for-phone-only {
+            flex-direction: column;
+        }
+
         .locationInfo {
             display: flex;
             flex-direction: column;
+
+            @include for-phone-only {
+                margin-bottom: 1rem;
+            }
 
             .city {
                 font-size: 2rem;
@@ -23,7 +32,16 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
 
+        @include for-phone-only {
+            display: flex;
+            flex-direction: column;
+        }
+
         .mainWeatherInfo {
+            @include for-phone-only {
+                margin-bottom: 2rem;
+            }
+
             .weather {
                 display: flex;
                 flex-direction: column;
@@ -65,11 +83,20 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
 
+            @include for-phone-only {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 1rem;
+            }
+
             .item {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
+
+                @include for-phone-only {
+                    align-items: flex-start;
+                }
 
                 .infoLabel {
                     font-size: 12px;
@@ -91,6 +118,10 @@
         width: 50%;
         position: relative;
 
+        @include for-phone-only {
+            width: 100%;
+        }
+
         .msg {
             color: #41343c;
             padding: 8px;
@@ -99,6 +130,10 @@
             column-gap: 3%;
             align-items: center;
             border-radius: 8px;
+
+            @include for-phone-only {
+                grid-template-columns: 10% 85%;
+            }
             
             &.warning { background-color: $warning-text-color; }
             &.danger { background-color: $danger-text-color; }
@@ -114,6 +149,10 @@
             right: -5px;
             bottom: 0;
             cursor: pointer;
+
+            @include for-phone-only {
+                bottom: -2px;
+            }
         }
     }
 }

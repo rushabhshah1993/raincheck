@@ -6,7 +6,7 @@ Dictionary states that,
 <br />
 noun NORTH AMERICAN
 <br />
-### noun: raincheck
+noun: raincheck
 1. a ticket given for later use when a sporting fixture or other outdoor event is interrupted or postponed by rain.
 
 <hr />

@@ -6,7 +6,7 @@ export const fetchCityWeather = (city = 'Mumbai') => {
         let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=60dfad51347e098c9a6b000ced44c353`;
         axios.get(url)
             .then(response => {
-                dispatch(setWeatherData(city, response.data.list));
+                dispatch(setWeatherData(response.data.city, response.data.list));
             })
             .catch(error => {
                 dispatch(requestFailure(error));

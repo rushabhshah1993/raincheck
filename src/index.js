@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faMapMarkerAlt
+    faMapMarkerAlt, faThermometerHalf, faUmbrella,
+    faHouseUser, faCloudSunRain, faSnowman,
+    faSmog, faWind, faExclamationTriangle,
+    faSun, faCloudSun
 } from '@fortawesome/free-solid-svg-icons';
 
 import './index.scss';
@@ -13,7 +16,10 @@ import store from './store/store';
 import Home from './pages/Home/Home';
 
 library.add(
-    faMapMarkerAlt
+    faMapMarkerAlt, faThermometerHalf, faUmbrella,
+    faHouseUser, faCloudSunRain, faSnowman,
+    faSmog, faWind, faExclamationTriangle,
+    faSun, faCloudSun
 );
 
 ReactDOM.render(

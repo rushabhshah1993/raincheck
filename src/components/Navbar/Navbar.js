@@ -15,7 +15,7 @@ const Navbar = props => {
                     <FontAwesomeIcon icon="map-marker-alt" />
                     {
                         props.weather.city ?
-                        <span className={styles.cityName}>{props.weather.city}</span> :
+                        <span className={styles.cityName}>{props.weather.city.name}</span> :
                         <span>Loading...</span>
                     }
                 </div>

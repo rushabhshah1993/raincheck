@@ -8,6 +8,7 @@ import {
 } from './../../store/actions/weatherActions';
 
 import Navbar from '../../components/Navbar/Navbar';
+import CurrentWeather from './CurrentWeather/CurrentWeather';
 
 const Home = props => {
     useEffect(() => {
@@ -17,7 +18,7 @@ const Home = props => {
     return (
         <div>
             <Navbar />
-            Home
+            <CurrentWeather />
         </div>
     )
 }

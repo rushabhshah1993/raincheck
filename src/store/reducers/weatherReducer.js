@@ -1,12 +1,14 @@
 import { cloneDeep } from 'lodash';
 
 import * as actions from './../actiontypes';
+import * as variables from './../../utils/__variables';
 
 const initialState = {
     city: null,
     weatherData: [],
     requestFailure: false,
-    isLoading: false
+    isLoading: false,
+    metric: variables.CELSIUS
 };
 
 const reducer = (state=initialState, action) => {

@@ -12,8 +12,45 @@ import {
 } from './../../../utils/js/config';
 import * as variables from './../../../utils/__variables';
 
+import Modal from '../../../components/Modal/Modal';
+import otherStyles from './../../../components/Navbar/navbar.scss';
+
+import {
+    fetchCityWeather
+} from './../../../store/actions/weatherActions';
+
 const CurrentWeather = props => {
     const [showMsg, toggleMsg] = useState(true);
+    const [modalDisplay, showModal] = useState(false);
+    const [inputText, setInputText] = useState('');
+
+    const chooseCity = () => {
+        props.fetchCityWeather(inputText);
+        setInputText('');
+        showModal(false);
+    }
+
+    const modalBody = (
+        <div className={otherStyles.modalBody}>
+            <span className={otherStyles.modalSubText}>RAINCHECK is currently showing you the weather of</span>
+            <p className={otherStyles.modalCityName}>{props?.weather?.city?.name}</p>
+
+            <div className={otherStyles.chooseContainer}>
+                <p className={otherStyles.chooseHeader}>Not from {props?.weather?.city?.name}?</p>
+                <div className={otherStyles.inputContainer}>
+                    <input 
+                        type="text" 
+                        className={otherStyles.inputBox} 
+                        placeholder={'Type a city'}
+                        value={inputText}
+                        onChange={event => setInputText(event.target.value)} />
+                    <span className={otherStyles.chooseBtn} onClick={() => chooseCity()}>Choose</span>
+                </div>
+            </div>
+        </div>
+    )
+
+
     let currentDate, mainTemp, tempImg,
         weatherDesc, feelsLike, cityName,
         otherInfo, message;
@@ -46,19 +83,35 @@ const CurrentWeather = props => {
         cityName = `${city.name}, ${city.country}`;
 
         otherInfo = relatedInfo.map(value => {
-            let infoValue = value.secondary_location ? 
-            latestWeather[value.primary_location][value.secondary_location] :
-            latestWeather[value.primary_location];
+            if(value.primary_location === 'rain' && weatherDesc.toLowerCase() === 'rain') {
+                let infoValue = value.secondary_location ? 
+                latestWeather[value.primary_location][value.secondary_location] :
+                latestWeather[value.primary_location];
 
-            return (
-                <div key={value.label} className={styles.item}>
-                    <span className={styles.infoLabel}>{value.label}</span>
-                    <div className={styles.infoValue}>
-                        <span className={styles.value}>{infoValue}</span> 
-                        <span className={styles.unit}>{value.unit}</span>
+                return (
+                    <div key={value.label} className={styles.item}>
+                        <span className={styles.infoLabel}>{value.label}</span>
+                        <div className={styles.infoValue}>
+                            <span className={styles.value}>{infoValue}</span> 
+                            <span className={styles.unit}>{value.unit}</span>
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else if(value.primary_location !== 'rain') {
+                let infoValue = value.secondary_location ? 
+                latestWeather[value.primary_location][value.secondary_location] :
+                latestWeather[value.primary_location];
+
+                return (
+                    <div key={value.label} className={styles.item}>
+                        <span className={styles.infoLabel}>{value.label}</span>
+                        <div className={styles.infoValue}>
+                            <span className={styles.value}>{infoValue}</span> 
+                            <span className={styles.unit}>{value.unit}</span>
+                        </div>
+                    </div>
+                )
+            }
         }) 
 
         message = (
@@ -71,40 +124,56 @@ const CurrentWeather = props => {
     }
 
     return (
-        <div className={styles.currentWeatherContainer}>
-            <div className={styles.currentWeatherHeader}>
-                <div className={styles.locationInfo}>
-                    <span className={styles.date}>{currentDate}</span>
-                    <span className={styles.city}>{cityName}</span>
+        <>
+            {
+                !props.weather.isLoading &&
+                <div className={styles.currentWeatherContainer}>
+                <div className={styles.currentWeatherHeader}>
+                    <div className={styles.locationInfo}>
+                        <span className={styles.date}>{currentDate}</span>
+                        <span className={styles.city}>{cityName}</span>
+                        <span className={styles.changeCity} onClick={() => showModal(true)}>Change location</span>
+                    </div>
+                    {
+                        showMsg &&
+                        <div className={styles.messageContainer}>{message}</div>
+                    }
                 </div>
-                {
-                    showMsg &&
-                    <div className={styles.messageContainer}>{message}</div>
-                }
-            </div>
-            <div className={styles.weatherContainer}>
-                <div className={styles.mainWeatherInfo}>
-                    <div className={styles.weather}>    
-                        <div className={styles.weatherDescContainer}>
-                            <span className={styles.weatherDesc}>
-                                {weatherDesc}
-                            </span>
-                            {tempImg}
-                        </div>
-            
-                        <div className={styles.weatherTemp}>
-                            <span className={styles.temperature}>{mainTemp}</span>
-                            <FontAwesomeIcon icon="thermometer-half" size="lg" />
-                        </div>
+                <div className={styles.weatherContainer}>
+                    <div className={styles.mainWeatherInfo}>
+                        <div className={styles.weather}>    
+                            <div className={styles.weatherDescContainer}>
+                                <span className={styles.weatherDesc}>
+                                    {weatherDesc}
+                                </span>
+                                {tempImg}
+                            </div>
+                
+                            <div className={styles.weatherTemp}>
+                                <span className={styles.temperature}>{mainTemp}</span>
+                                <FontAwesomeIcon icon="thermometer-half" size="lg" />
+                            </div>
 
-                        <span className={styles.feelsLike}>Feels like: {feelsLike}</span>
+                            <span className={styles.feelsLike}>Feels like: {feelsLike}</span>
+                        </div>
+                    </div>
+                    <div className={styles.weatherRestInfo}>
+                        { otherInfo }
                     </div>
                 </div>
-                <div className={styles.weatherRestInfo}>
-                    { otherInfo }
-                </div>
             </div>
-        </div>
+            }
+            {
+                props.weather.isLoading &&
+                <p>Loading...</p>
+            }
+            <Modal 
+                show={modalDisplay} 
+                body={modalBody} 
+                cancel={() => showModal(false)}
+                closeSymbol={true}
+                header={'Choose another city'} />
+        </>
     )
 }
 
@@ -114,4 +183,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(CurrentWeather);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchCityWeather: city => dispatch(fetchCityWeather(city))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeather);

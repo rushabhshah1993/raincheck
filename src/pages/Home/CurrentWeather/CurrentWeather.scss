@@ -25,6 +25,12 @@
                 font-size: 2rem;
                 font-weight: 100;
             }
+
+            .changeCity {
+                font-size: 12px;
+                color: #17A2B8;
+                cursor: pointer;
+            }
         }
     }
 
@@ -117,6 +123,7 @@
     .messageContainer {
         width: 50%;
         position: relative;
+        height: 100%;
 
         @include for-phone-only {
             width: 100%;
@@ -137,7 +144,7 @@
             
             &.warning { background-color: $warning-text-color; }
             &.danger { background-color: $danger-text-color; }
-            &.normal { background-color: $normal-text-color; }
+            &.normal { background-color: $normal-text-color; color: $white; }
         }
 
         .close {
@@ -147,7 +154,7 @@
             padding: 2px 8px;
             border: #EAEAEA;
             right: -5px;
-            bottom: 0;
+            bottom: -3px;
             cursor: pointer;
 
             @include for-phone-only {

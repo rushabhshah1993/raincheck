@@ -30,10 +30,13 @@ const FutureWeather = props => {
                         <span className={styles.weatherDesc}>{datum.weather[0].main}</span>
                     </div>
                     <div className={styles.infoContainer}>
-                        <div className={styles.item}>
-                            <span className={styles.label}>Rainfall</span>
-                            <span className={styles.value}>{datum.rain["3h"]}mm</span>
-                        </div>
+                        {
+                            datum.rain &&
+                            <div className={styles.item}>
+                                <span className={styles.label}>Rainfall</span>
+                                <span className={styles.value}>{datum?.rain["3h"]}mm</span>
+                            </div>
+                        }
                         <div className={styles.item}>
                             <span className={styles.label}>Temperature</span>
                             <span className={styles.value}>{temp}{weatherUnits[props.weather.metric]}</span>

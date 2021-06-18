@@ -1,3 +1,6 @@
+@import './../../utils/scss/_variables';
+@import './../../utils/scss/_mixins';
+
 .navbarContainer {
     padding: 16px;
     display: flex;
@@ -14,6 +17,52 @@
         .cityInfo {
             .cityName {
                 margin-left: 4px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.modalBody {
+    .modalSubText {
+        font-size: 14px;
+    }
+
+    .modalCityName {
+        font-size: 2rem !important;
+        font-weight: 100;
+        margin: 0;
+    }
+
+    .chooseContainer {
+        .chooseHeader {
+            margin-bottom: 8px;
+        }
+    }
+
+    .inputContainer {
+        @include for-phone-only {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+        }
+        
+        .inputBox {
+            border: none;
+            width: 80%;
+            margin-right: 8px;
+            padding: 8px;
+            font-size: 1rem;
+            outline: none;
+            border-bottom: 1px solid $secondary-text-color;
+        }
+
+        .chooseBtn {
+            color: $secondary-text-color;
+            cursor: pointer;
+
+            &:hover {
+                color: $primary-text-color;
             }
         }
     }

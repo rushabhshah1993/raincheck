@@ -2,7 +2,7 @@
 
 Dictionary states that,
 
-rain check
+<i>rain check</i>
 <br />
 noun NORTH AMERICAN
 <br />
@@ -39,7 +39,7 @@ Simply go to [RainCheck](https://raincheck-b5a57.web.app/) on your laptop, deskt
 <br />
 
 ### For developers:
-If you are a developer and if you want to check the code, kindly check the section <b>Steps to run this project on your machine</b>. 
+If you are a developer and if you want to check the code, kindly check the section <b>Steps to run this project on your machine</b>. The entire project has been created using ReactJS, and it is hosted on Firebase.
 <br />
 Before you begin, make sure your machine is compatible. You need to have the following pre-requisites:
 

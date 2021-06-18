@@ -11,7 +11,7 @@ noun: raincheck
 
 <hr />
 
-The official RAINCHECK application does help you achieve that and much more with a simple check over the weather over the next 5 days.
+The official RAINCHECK application helps you achieve that and much more with a simple weather check for any city on the planet. By default, the application will show you the weather for Mumbai. RAINCHECK gives you the latest temperature for the day and the weather over the next 5 days.
 
 <br />
 <br />

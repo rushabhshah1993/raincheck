@@ -9,6 +9,8 @@ import {
 
 import Navbar from '../../components/Navbar/Navbar';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
+import FutureWeather from './FutureWeather/FutureWeather';
+
 
 const Home = props => {
     useEffect(() => {
@@ -19,6 +21,7 @@ const Home = props => {
         <div>
             <Navbar />
             <CurrentWeather />
+            <FutureWeather />
         </div>
     )
 }

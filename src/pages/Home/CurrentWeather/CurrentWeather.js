@@ -22,7 +22,15 @@ const CurrentWeather = props => {
     }
 
     if(props.weather.weatherData.length) {
-        let latestWeather = props.weather.weatherData[0];
+        let todayDate = new Date().getDate();
+        let todayHour = new Date().getHours();
+        let latestWeather = props.weather.weatherData.filter(datum => {
+            return new Date(datum.dt_txt).getDate() === +todayDate;
+        }).reduce((prev, current) => {
+            return (current - todayHour) < (prev - todayHour) ? curr : prev;
+        }) 
+
+        // let latestWeather = props.weather.weatherData[0];
         let city = props.weather.city;
         let iconUrl = `http://openweathermap.org/img/wn/${latestWeather.weather[0].icon}@2x.png`;
         let tempValue = convertWeatherUnit(variables.KELVIN, props.weather.metric, latestWeather.main.temp).toFixed(1);

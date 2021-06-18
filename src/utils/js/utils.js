@@ -30,3 +30,13 @@ export const fetchCurrentDate = () => {
     let date = new Date();
     return `${week[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+export const prettyDate = date => {
+    return `${week[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
+}
+
+export const get12PMData = data => {
+    return data.filter(datum => {
+        return datum.dt_txt.split(" ")[1].indexOf(12) !== -1;
+    })
+}

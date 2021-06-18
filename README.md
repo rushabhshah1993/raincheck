@@ -2,7 +2,7 @@
 
 Dictionary states that,
 
-## rain check
+rain check
 noun NORTH AMERICAN
 <br />
 ### noun: raincheck

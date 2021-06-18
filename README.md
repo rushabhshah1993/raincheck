@@ -3,6 +3,7 @@
 Dictionary states that,
 
 rain check
+<br />
 noun NORTH AMERICAN
 <br />
 ### noun: raincheck
